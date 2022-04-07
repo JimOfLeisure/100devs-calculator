@@ -28,6 +28,11 @@ class Calculator {
     this.keypad.appendChild(
       this.newButton('-', this.subtractHandler.bind(this))
     );
+    this.keypad.appendChild(this.newButton('+', this.addHandler.bind(this)));
+    this.keypad.appendChild(
+      this.newButton('*', this.multiplyHandler.bind(this))
+    );
+    this.keypad.appendChild(this.newButton('/', this.divideHandler.bind(this)));
   }
 
   numKeyPressed = function (event) {
@@ -57,6 +62,33 @@ class Calculator {
   }
   subtractFunc(op1, op2) {
     return op1 - op2;
+  }
+  addHandler(event) {
+    // TODO: Chain accumulator ?
+    this.accumulator = Number(this.display.innerHTML);
+    this.opFunc = this.addFunc;
+    this.display.innerHTML = '';
+  }
+  addFunc(op1, op2) {
+    return op1 + op2;
+  }
+  multiplyHandler(event) {
+    // TODO: Chain accumulator ?
+    this.accumulator = Number(this.display.innerHTML);
+    this.opFunc = this.multiplyFunc;
+    this.display.innerHTML = '';
+  }
+  multiplyFunc(op1, op2) {
+    return op1 * op2;
+  }
+  divideHandler(event) {
+    // TODO: Chain accumulator ?
+    this.accumulator = Number(this.display.innerHTML);
+    this.opFunc = this.divideFunc;
+    this.display.innerHTML = '';
+  }
+  divideFunc(op1, op2) {
+    return op1 / op2;
   }
 }
 
