@@ -9,3 +9,7 @@ section {
   min-height: 5ch;
   padding: 1em;
 }
+
+.display {
+  text-align: right;
+}

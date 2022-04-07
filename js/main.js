@@ -19,17 +19,20 @@ class Calculator {
     this.element.appendChild(this.keypad);
 
     for (let i = 0; i < 10; i++) {
-      const key = document.createElement('button');
-      key.innerHTML = i;
-      key.addEventListener('click', this.numKeyPressed.bind(this));
-      this.keypad.appendChild(key);
+      this.keypad.appendChild(this.newButton(i, this.numKeyPressed.bind(this)));
     }
+    this.keypad.appendChild(this.newButton('.', this.numKeyPressed.bind(this)));
+  }
+  numKeyPressed = function (event) {
+    this.display.innerHTML += event.target.innerHTML;
+  };
+  newButton(label, handler) {
+    const key = document.createElement('button');
+    key.innerHTML = label;
+    key.addEventListener('click', handler);
+    return key;
   }
 }
-Calculator.prototype.numKeyPressed = function (event) {
-  console.log(event.target.innerHTML, this.display);
-  this.display.innerHTML += event.target.innerHTML;
-};
 
 const calcElement = document.querySelector('#calculator');
 const calc = new Calculator(calcElement);
