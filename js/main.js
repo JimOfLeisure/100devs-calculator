@@ -3,6 +3,8 @@ console.log('yo');
 
 class Calculator {
   constructor(element) {
+    this.accumulator = 0;
+    this.opFunc = this.nullFunc;
     this.element = element;
     this.numKeys = [];
     this.opKeys = [];
@@ -23,15 +25,23 @@ class Calculator {
     }
     this.keypad.appendChild(this.newButton('.', this.numKeyPressed.bind(this)));
   }
+
   numKeyPressed = function (event) {
     this.display.innerHTML += event.target.innerHTML;
   };
+
   newButton(label, handler) {
     const key = document.createElement('button');
     key.innerHTML = label;
     key.addEventListener('click', handler);
     return key;
   }
+  equalsHandler(event) {
+    const operand = Number(this.display.innerHTML);
+    const result = this.opFunc(this.accumulator, operand);
+    this.display.innerHTML = result;
+  }
+  nullFunc() {}
 }
 
 const calcElement = document.querySelector('#calculator');
