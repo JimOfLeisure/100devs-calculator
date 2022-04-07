@@ -25,6 +25,9 @@ class Calculator {
     }
     this.keypad.appendChild(this.newButton('.', this.numKeyPressed.bind(this)));
     this.keypad.appendChild(this.newButton('=', this.equalsHandler.bind(this)));
+    this.keypad.appendChild(
+      this.newButton('-', this.subtractHandler.bind(this))
+    );
   }
 
   numKeyPressed = function (event) {
@@ -45,6 +48,15 @@ class Calculator {
   nullFunc(op1, op2) {
     // just return the current display
     return op2;
+  }
+  subtractHandler(event) {
+    // TODO: Chain accumulator ?
+    this.accumulator = Number(this.display.innerHTML);
+    this.opFunc = this.subtractFunc;
+    this.display.innerHTML = '';
+  }
+  subtractFunc(op1, op2) {
+    return op1 - op2;
   }
 }
 
