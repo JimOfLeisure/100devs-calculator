@@ -24,6 +24,7 @@ class Calculator {
       this.keypad.appendChild(this.newButton(i, this.numKeyPressed.bind(this)));
     }
     this.keypad.appendChild(this.newButton('.', this.numKeyPressed.bind(this)));
+    this.keypad.appendChild(this.newButton('=', this.equalsHandler.bind(this)));
   }
 
   numKeyPressed = function (event) {
@@ -41,7 +42,10 @@ class Calculator {
     const result = this.opFunc(this.accumulator, operand);
     this.display.innerHTML = result;
   }
-  nullFunc() {}
+  nullFunc(op1, op2) {
+    // just return the current display
+    return op2;
+  }
 }
 
 const calcElement = document.querySelector('#calculator');
